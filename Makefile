@@ -7,5 +7,5 @@ build-proto:
 build-run:
 	go build -v -o bin/app-grpc cmd/app-grpc/*.go && ./bin/app-grpc --debug
 
-start-dev:
-	reflex -g 'cmd/*.go grpc/*.go internal/*.go' -s make build-run
+start-dev: 
+	reflex -r \.go -s make build-run
