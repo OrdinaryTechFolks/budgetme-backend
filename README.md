@@ -5,4 +5,4 @@
 
 ## How To Run
 1. Run ```make setup``` to download dependencies
-2. Run ```make run``` to run the application
+2. Run ```make start-dev``` to run the application

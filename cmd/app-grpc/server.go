@@ -1,13 +1,33 @@
 package main
 
 import (
-	AuthHandler "github.com/TheUnderdogFolks/budgetme-backend/internal/handler/grpc/auth"
-	AuthRepo "github.com/TheUnderdogFolks/budgetme-backend/internal/repo/auth"
-	AuthUseCase "github.com/TheUnderdogFolks/budgetme-backend/internal/usecase/auth"
+	"fmt"
+	"log"
+	"net"
+
+	pb "github.com/TheUnderdogFolks/budgetme-backend/grpc/budgetme/proto"
+	serverHandler "github.com/TheUnderdogFolks/budgetme-backend/internal/handler/grpc/server"
+	"github.com/TheUnderdogFolks/budgetme-backend/internal/pkg/env"
+	serverUseCase "github.com/TheUnderdogFolks/budgetme-backend/internal/usecase/server"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
-func startServer() {
-	authRepo := AuthRepo.New()
-	authUseCase := AuthUseCase.New(authRepo)
-	_ = AuthHandler.New(authUseCase)
+func startServer(serverUseCase *serverUseCase.Server) {
+	server := grpc.NewServer()
+	reflection.Register(server)
+
+	serverHandler := serverHandler.New(serverUseCase)
+	pb.RegisterServerServer(server, serverHandler)
+
+	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", env.GetInt("port", "8001")))
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+
+	log.Printf("server listening at %v", listener.Addr())
+	if err := server.Serve(listener); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 }

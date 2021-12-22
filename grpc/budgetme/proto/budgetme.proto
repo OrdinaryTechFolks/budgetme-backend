@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package budgetme;
+
+service Server {
+    rpc GetHealth(GetHealthRequest) returns (GetHealthResponse);
+}
+
+message GetHealthRequest {}
+
+
+message GetHealthResponse {
+    string message = 1;
+}
