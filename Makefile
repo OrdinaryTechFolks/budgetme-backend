@@ -1,5 +1,11 @@
 setup:
 	go mod vendor
 
-run:
+build-proto:
+	@protoc -I grpc/budgetme/proto grpc/budgetme/proto/*.proto --gofast_out=plugins=grpc:grpc/budgetme/proto
+
+build-run:
 	go build -v -o bin/app-grpc cmd/app-grpc/*.go && ./bin/app-grpc --debug
+
+start-dev:
+	reflex -g 'cmd/*.go grpc/*.go internal/*.go' -s make build-run
