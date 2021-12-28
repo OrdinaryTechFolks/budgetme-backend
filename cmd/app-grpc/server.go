@@ -12,10 +12,15 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+
+	"github.com/newrelic/go-agent/v3/integrations/nrgrpc"
 )
 
-func startServer(serverUseCase *serverUseCase.Server) {
-	server := grpc.NewServer()
+func startServer(metrics *newrelic.Application, serverUseCase *serverUseCase.Server) {
+	server := grpc.NewServer(
+		grpc.UnaryInterceptor(nrgrpc.UnaryServerInterceptor(metrics)),
+		grpc.StreamInterceptor(nrgrpc.StreamServerInterceptor(metrics)),
+	)
 	reflection.Register(server)
 
 	serverHandler := serverHandler.New(serverUseCase)
