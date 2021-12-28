@@ -6,17 +6,18 @@ import (
 	"net"
 
 	pb "github.com/TheWokeDeveloper/budgetme-backend/grpc/budgetme/proto"
+	"github.com/TheWokeDeveloper/budgetme-backend/internal/config"
 	serverHandler "github.com/TheWokeDeveloper/budgetme-backend/internal/handler/grpc/server"
-	"github.com/TheWokeDeveloper/budgetme-backend/internal/pkg/env"
 	serverUseCase "github.com/TheWokeDeveloper/budgetme-backend/internal/usecase/server"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
 	"github.com/newrelic/go-agent/v3/integrations/nrgrpc"
+	"github.com/newrelic/go-agent/v3/newrelic"
 )
 
-func startServer(metrics *newrelic.Application, serverUseCase *serverUseCase.Server) {
+func startServer(cfg *config.Config, metrics *newrelic.Application, serverUseCase *serverUseCase.Server) {
 	server := grpc.NewServer(
 		grpc.UnaryInterceptor(nrgrpc.UnaryServerInterceptor(metrics)),
 		grpc.StreamInterceptor(nrgrpc.StreamServerInterceptor(metrics)),
@@ -26,7 +27,7 @@ func startServer(metrics *newrelic.Application, serverUseCase *serverUseCase.Ser
 	serverHandler := serverHandler.New(serverUseCase)
 	pb.RegisterServerServer(server, serverHandler)
 
-	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", env.GetInt("port", "8001")))
+	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", cfg.Port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
