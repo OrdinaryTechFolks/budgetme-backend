@@ -3,8 +3,8 @@ package server
 import (
 	"fmt"
 
-	ServerEntity "github.com/TheUnderdogFolks/budgetme-backend/internal/entity/server"
-	"github.com/TheUnderdogFolks/budgetme-backend/internal/pkg/env"
+	ServerEntity "github.com/TheWokeDeveloper/budgetme-backend/internal/entity/server"
+	"github.com/TheWokeDeveloper/budgetme-backend/internal/pkg/env"
 )
 
 func (r *Repo) GetHealth() (*ServerEntity.Health, error) {

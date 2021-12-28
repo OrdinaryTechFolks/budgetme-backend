@@ -1,7 +1,7 @@
 package server
 
 import (
-	ServerEntity "github.com/TheUnderdogFolks/budgetme-backend/internal/entity/server"
+	ServerEntity "github.com/TheWokeDeveloper/budgetme-backend/internal/entity/server"
 )
 
 type serverRepo interface {

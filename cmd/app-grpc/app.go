@@ -1,8 +1,8 @@
 package main
 
 import (
-	serverRepo "github.com/TheUnderdogFolks/budgetme-backend/internal/repo/server"
-	serverUseCase "github.com/TheUnderdogFolks/budgetme-backend/internal/usecase/server"
+	serverRepo "github.com/TheWokeDeveloper/budgetme-backend/internal/repo/server"
+	serverUseCase "github.com/TheWokeDeveloper/budgetme-backend/internal/usecase/server"
 )
 
 func startApp() {
