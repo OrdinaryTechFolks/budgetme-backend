@@ -9,13 +9,19 @@ import (
 	serverHandler "github.com/TheUnderdogFolks/budgetme-backend/internal/handler/grpc/server"
 	"github.com/TheUnderdogFolks/budgetme-backend/internal/pkg/env"
 	serverUseCase "github.com/TheUnderdogFolks/budgetme-backend/internal/usecase/server"
+	"github.com/newrelic/go-agent/v3/newrelic"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+
+	"github.com/newrelic/go-agent/v3/integrations/nrgrpc"
 )
 
-func startServer(serverUseCase *serverUseCase.Server) {
-	server := grpc.NewServer()
+func startServer(metrics *newrelic.Application, serverUseCase *serverUseCase.Server) {
+	server := grpc.NewServer(
+		grpc.UnaryInterceptor(nrgrpc.UnaryServerInterceptor(metrics)),
+		grpc.StreamInterceptor(nrgrpc.StreamServerInterceptor(metrics)),
+	)
 	reflection.Register(server)
 
 	serverHandler := serverHandler.New(serverUseCase)
