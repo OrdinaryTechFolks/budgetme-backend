@@ -1,6 +1,6 @@
 package server
 
-import "github.com/TheWokeDeveloper/budgetme-backend/internal/config"
+import "github.com/OrdinaryTechFolks/budgetme-backend/internal/config"
 
 type Repo struct {
 	cfg *config.Config

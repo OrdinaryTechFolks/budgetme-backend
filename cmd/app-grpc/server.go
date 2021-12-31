@@ -5,10 +5,10 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/TheWokeDeveloper/budgetme-backend/grpc/budgetme/proto"
-	"github.com/TheWokeDeveloper/budgetme-backend/internal/config"
-	serverHandler "github.com/TheWokeDeveloper/budgetme-backend/internal/handler/grpc/server"
-	serverUseCase "github.com/TheWokeDeveloper/budgetme-backend/internal/usecase/server"
+	pb "github.com/OrdinaryTechFolks/budgetme-backend/grpc/budgetme/proto"
+	"github.com/OrdinaryTechFolks/budgetme-backend/internal/config"
+	serverHandler "github.com/OrdinaryTechFolks/budgetme-backend/internal/handler/grpc/server"
+	serverUseCase "github.com/OrdinaryTechFolks/budgetme-backend/internal/usecase/server"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"

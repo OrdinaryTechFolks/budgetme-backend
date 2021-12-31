@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	cfg "github.com/TheWokeDeveloper/budgetme-backend/internal/config"
+	cfg "github.com/OrdinaryTechFolks/budgetme-backend/internal/config"
 )
 
 func main() {

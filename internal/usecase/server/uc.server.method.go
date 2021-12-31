@@ -1,7 +1,7 @@
 package server
 
 import (
-	ServerEntity "github.com/TheWokeDeveloper/budgetme-backend/internal/entity/server"
+	ServerEntity "github.com/OrdinaryTechFolks/budgetme-backend/internal/entity/server"
 )
 
 func (s *Server) GetHealth() (*ServerEntity.Health, error) {

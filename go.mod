@@ -1,4 +1,4 @@
-module github.com/TheWokeDeveloper/budgetme-backend
+module github.com/OrdinaryTechFolks/budgetme-backend
 
 go 1.17
 

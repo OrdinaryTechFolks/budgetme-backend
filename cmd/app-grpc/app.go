@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/TheWokeDeveloper/budgetme-backend/internal/config"
-	serverRepo "github.com/TheWokeDeveloper/budgetme-backend/internal/repo/server"
-	serverUseCase "github.com/TheWokeDeveloper/budgetme-backend/internal/usecase/server"
+	"github.com/OrdinaryTechFolks/budgetme-backend/internal/config"
+	serverRepo "github.com/OrdinaryTechFolks/budgetme-backend/internal/repo/server"
+	serverUseCase "github.com/OrdinaryTechFolks/budgetme-backend/internal/usecase/server"
 	"github.com/newrelic/go-agent/v3/newrelic"
 )
 
