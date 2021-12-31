@@ -9,7 +9,7 @@ import (
 func main() {
 	var configPath string
 
-	flag.StringVar(&configPath, "config", "./config.yml", "path to config file")
+	flag.StringVar(&configPath, "config", "./files/config.yaml", "path to config file")
 	flag.Parse()
 
 	cfg, err := cfg.GetConfig(configPath)
