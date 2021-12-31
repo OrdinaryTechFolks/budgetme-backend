@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func Get(key string, defaultValue string) string {
+func GetString(key string, defaultValue string) string {
 	value, exists := os.LookupEnv(key)
 
 	if !exists || len(value) == 0 {
@@ -16,12 +16,12 @@ func Get(key string, defaultValue string) string {
 	return value
 }
 
-func GetString(key string, defaultValue string) string {
-	return Get(key, defaultValue)
-}
+func GetInt(key string, defaultValue int) int {
+	value, exists := os.LookupEnv(key)
 
-func GetInt(key string, defaultValue string) int {
-	value := Get(key, defaultValue)
+	if !exists || len(value) == 0 {
+		return defaultValue
+	}
 
 	intValue, err := strconv.Atoi(value)
 	if err != nil {
