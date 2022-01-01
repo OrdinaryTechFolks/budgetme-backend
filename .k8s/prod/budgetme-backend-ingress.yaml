@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: budgetme-backend-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+spec:
+  rules:
+    - host: budgetme-backend.ordinarytechfolks.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: budgetme-backend-svc
+                port:
+                  number: 8001
+  tls:
+    - hosts: 
+      - budgetme-backend.ordinarytechfolks.com
+      secretName: ordinarytechfolks-ssltls-secret
