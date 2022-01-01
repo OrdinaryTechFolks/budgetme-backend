@@ -14,5 +14,5 @@ spec:
     spec:
       containers:
         - name: budgetme-backend
-          image: huseinnashr/budgetme-backend:0.0.1
+          image: huseinnashr/budgetme-backend:${RELEASE_VERSION}
           imagePullPolicy: Always

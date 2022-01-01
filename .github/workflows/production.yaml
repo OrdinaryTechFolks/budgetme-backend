@@ -1,0 +1,22 @@
+name: "Release to Production"
+
+on:
+  push:
+    tags: 
+    - '*-production'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set REALEASE_VERSION
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - run: sed -i 's/${RELEASE_VERSION}/$RELEASE_VERSION/g' ./files/config/production.yaml && head ./files/config/production.yaml
+      - run: docker build -t huseinnashr/budgetme-backend:$RELEASE_VERSION .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push huseinnashr/budgetme-backend:$RELEASE_VERSION
+      - run: sed -i 's/${RELEASE_VERSION}/$RELEASE_VERSION/g' ./k8s/prod/budgetme-backend-depl.yaml && head ./k8s/prod/budgetme-backend-depl.yaml

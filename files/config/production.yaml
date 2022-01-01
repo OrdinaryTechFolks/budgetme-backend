@@ -1,0 +1,2 @@
+version: ${RELEASE_VERSION}
+port: 80

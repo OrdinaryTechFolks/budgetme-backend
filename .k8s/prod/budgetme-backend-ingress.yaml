@@ -16,7 +16,7 @@ spec:
               service:
                 name: budgetme-backend-svc
                 port:
-                  number: 8001
+                  number: 80
   tls:
     - hosts: 
       - budgetme-backend.ordinarytechfolks.com

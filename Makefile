@@ -8,7 +8,7 @@ build:
 	go build -v -o bin/app-grpc cmd/app-grpc/*.go
 
 start-dev: 
-	reflex -r "\.(go|yaml)" -s -- sh -c "make build && ./bin/app-grpc -config=./files/config.yaml"
+	reflex -r "\.(go|yaml)" -s -- sh -c "make build && ./bin/app-grpc -config=./files/config/development.yaml"
 
 start-prod:
-	./bin/app-grpc -config=./files/config.yaml 
+	./bin/app-grpc -config=./files/config/production.yaml 
