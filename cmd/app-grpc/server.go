@@ -27,7 +27,7 @@ func startServer(cfg *config.Config, metrics *newrelic.Application, serverUseCas
 	serverHandler := serverHandler.New(serverUseCase)
 	pb.RegisterServerServer(server, serverHandler)
 
-	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", cfg.Port))
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", cfg.Port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}

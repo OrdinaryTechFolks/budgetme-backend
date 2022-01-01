@@ -4,8 +4,11 @@ setup:
 build-proto:
 	@protoc -I grpc/budgetme/proto grpc/budgetme/proto/*.proto --gofast_out=plugins=grpc:grpc/budgetme/proto
 
-build-run:
-	go build -v -o bin/app-grpc cmd/app-grpc/*.go && ./bin/app-grpc -config=./files/config.yaml 
+build:
+	go build -v -o bin/app-grpc cmd/app-grpc/*.go
 
 start-dev: 
-	reflex -r "\.(go|yaml)" -s make build-run
+	reflex -r "\.(go|yaml)" -s -- sh -c "make build && ./bin/app-grpc -config=./files/config.yaml"
+
+start-prod:
+	./bin/app-grpc -config=./files/config.yaml 

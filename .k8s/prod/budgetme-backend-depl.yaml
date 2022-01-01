@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budgetme-backend-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: budgetme-backend-pod
+  template:
+    metadata:
+      labels:
+        app: budgetme-backend-pod
+    spec:
+      containers:
+        - name: budgetme-backend
+          image: huseinnashr/budgetme-backend:0.0.1
+          imagePullPolicy: Always
