@@ -27,6 +27,6 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_PROD }}
         with:
           args: |
-            kubectl apply -f ./.k8s/prod/budgetme-backend-deply.yaml
+            kubectl apply -f ./.k8s/prod/budgetme-backend-depl.yaml
             kubectl apply -f ./.k8s/prod/budgetme-backend-svc.yaml
             kubectl apply -f ./.k8s/prod/budgetme-backend-ingress.yaml
