@@ -21,9 +21,10 @@ jobs:
       - run: docker build -t huseinnashr/budgetme-backend:$RELEASE_VERSION .
       - run: docker push huseinnashr/budgetme-backend:$RELEASE_VERSION
       - run: sed -i "s/#{RELEASE_VERSION}/$RELEASE_VERSION/g" ./.k8s/prod/budgetme-backend-depl.yaml
-      - uses: actions-hub/kubectl@master
+      - name: Deploy to Production Cluster
+        uses: wahyd4/kubectl-helm-action@master
         env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_PROD }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_PROD }}
         with:
           args: |
             kubectl apply -f .k8s/prod/budgetme-backend-deply.yaml
