@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Set REALEASE_VERSION
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - run: sed -i "s/#{RELEASE_VERSION}/$RELEASE_VERSION/g" ./files/config/production.yaml && head ./files/config/production.yaml
+      - run: sed -i "s/#{RELEASE_VERSION}/$RELEASE_VERSION/g" ./files/config/production.yaml
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -20,4 +20,12 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - run: docker build -t huseinnashr/budgetme-backend:$RELEASE_VERSION .
       - run: docker push huseinnashr/budgetme-backend:$RELEASE_VERSION
-      - run: sed -i "s/#{RELEASE_VERSION}/$RELEASE_VERSION/g" ./k8s/prod/budgetme-backend-depl.yaml && head ./k8s/prod/budgetme-backend-depl.yaml
+      - run: sed -i "s/#{RELEASE_VERSION}/$RELEASE_VERSION/g" ./.k8s/prod/budgetme-backend-depl.yaml
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_PROD }}
+        with:
+          args: |
+            kubectl apply -f .k8s/prod/budgetme-backend-deply.yaml
+            kubectl apply -f .k8s/prod/budgetme-backend-svc.yaml
+            kubectl apply -f .k8s/prod/budgetme-backend-ingress.yaml
