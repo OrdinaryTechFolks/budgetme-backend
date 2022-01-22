@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 
-	pb "github.com/OrdinaryTechFolks/budgetme-backend/grpc/budgetme/proto"
+	pb "github.com/OrdinaryTechFolks/grpc/budgetme/proto"
 )
 
 func (h *Handler) GetHealth(ctx context.Context, req *pb.GetHealthRequest) (*pb.GetHealthResponse, error) {
