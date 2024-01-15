@@ -2,9 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: budgetme-backend-ingress
+  namespace: budgetme
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
     - host: budgetme-backend.ordinarytechfolks.com
@@ -20,4 +22,4 @@ spec:
   tls:
     - hosts: 
       - budgetme-backend.ordinarytechfolks.com
-      secretName: ordinarytechfolks-ssltls-secret
+      secretName: otfs-tls
