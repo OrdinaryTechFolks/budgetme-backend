@@ -18,8 +18,8 @@ jobs:
       #   with:
       #     username: ${{ secrets.DOCKERHUB_USERNAME }}
       #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      - run: docker build -t host.docker.internal:5001/budgetme-backend:$RELEASE_VERSION .
-      - run: docker push host.docker.internal:5001/budgetme-backend:$RELEASE_VERSION
+      - run: docker build -t container-registry.infra.svc.cluster.local/budgetme-backend:$RELEASE_VERSION .
+      - run: docker push container-registry.infra.svc.cluster.local/budgetme-backend:$RELEASE_VERSION
       - run: sed -i "s/#{RELEASE_VERSION}/$RELEASE_VERSION/g" ./.k8s/prod/budgetme-backend-depl.yaml
       - name: Deploy to Production Cluster
         uses: wahyd4/kubectl-helm-action@master
