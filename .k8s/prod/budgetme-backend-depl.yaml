@@ -15,5 +15,5 @@ spec:
     spec:
       containers:
         - name: budgetme-backend
-          image: host.docker.internal:5001/budgetme-backend:#{RELEASE_VERSION}
+          image: container-registry.infra.svc.cluster.local/budgetme-backend:#{RELEASE_VERSION}
           imagePullPolicy: Always
